@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Livewire\CategoryController;
+use App\Livewire\Categories\CategoryController;
+use App\Livewire\CreateCategoryController;
 use App\Livewire\DashboardController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,7 @@ Route::prefix('/dashboard')->group(function(){
 
     Route::prefix('category')->group(function(){
         Route::get('/', CategoryController::class)->name('category.index');
+        Route::get('/create', CreateCategoryController::class)->name('category.create');
     });
     
 
