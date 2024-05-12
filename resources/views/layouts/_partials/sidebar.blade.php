@@ -10,7 +10,7 @@
                 <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i>مدیریت دسته بندی</a>
                 <ul class="nav-dropdown-items">
                     <li class="nav-item">
-                        <a class="nav-link" href=""><i class="icon-puzzle"></i>دسته بندی فایل</a>
+                        <a class="nav-link" href="{{ route('category.index') }}"><i class="icon-puzzle"></i>دسته بندی</a>
                     </li>
                 </ul>
             </li>

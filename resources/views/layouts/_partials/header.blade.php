@@ -8,7 +8,7 @@
     <meta name="description" content="Roxo Administrator">
     <meta name="author" content="Masoud Salehi">
     <meta name="keyword" content="Bootstrap Data">
-    <title>@yield('title') | سجاد ملک</title>
+    <title>@yield('title') پنل ادمین</title>
     <link href="{{ asset('admin/css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('admin/css/simple-line-icons.css') }}" rel="stylesheet">
     <link href="{{ asset('admin/dest/style.css') }}" rel="stylesheet">

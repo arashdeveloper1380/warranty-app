@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Livewire\CategoryController;
 use App\Livewire\DashboardController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,11 @@ Route::get('/', function () {
 Route::prefix('/dashboard')->group(function(){
 
     Route::get('/', DashboardController::class)->name('dashboard.index');
+
+    Route::prefix('category')->group(function(){
+        Route::get('/', CategoryController::class)->name('category.index');
+    });
+    
 
 })->middleware(['auth', 'verified'])->name('dashboard');
 
