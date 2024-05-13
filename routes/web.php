@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Livewire\Categories\CategoryController;
-use App\Livewire\CreateCategoryController;
+use App\Livewire\Categories\CreateCategoryController;
 use App\Livewire\DashboardController;
 use Illuminate\Support\Facades\Route;
 

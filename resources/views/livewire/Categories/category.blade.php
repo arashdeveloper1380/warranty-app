@@ -19,7 +19,7 @@
     @if(session()->has('success'))
         <div class="alert alert-success">{{ session()->get('success') }}</div>
     @endif
-    <a href="" class="btn btn-primary pull-left">+ دسته بندی جدید</a><br>
+    <a href="{{ route('category.create') }}" class="btn btn-primary pull-left">+ دسته بندی جدید</a><br>
 
     <table class="table table-bordered table-striped table-hover"
         style="border-radius: 20px; display: block; padding: 30px;padding: 30px;box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;border: 0;width: 100%;margin: 20px auto;">

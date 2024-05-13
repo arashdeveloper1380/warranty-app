@@ -18,4 +18,5 @@ class Category extends Model
     public function getParent(){
         return $this->hasOne(Category::class, 'id', 'parent_id');
     }
+    
 }
