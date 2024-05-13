@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use App\Livewire\Categories\CategoryController;
 use App\Livewire\Categories\CreateCategoryController;
 use App\Livewire\DashboardController;
+use App\Livewire\Products\CreateProductController;
+use App\Livewire\Products\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,6 +30,11 @@ Route::prefix('/dashboard')->group(function(){
     Route::prefix('category')->group(function(){
         Route::get('/', CategoryController::class)->name('category.index');
         Route::get('/create', CreateCategoryController::class)->name('category.create');
+    });
+
+    Route::prefix('product')->group(function(){
+        Route::get('/', ProductController::class)->name('product.index');
+        Route::get('/create', CreateProductController::class)->name('product.create');
     });
     
 
