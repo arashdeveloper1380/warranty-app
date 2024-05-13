@@ -11,6 +11,9 @@
         .btn-primary{
             border-radius: 20px; 
         }
+        .d-flex.justify-content-between.flex-fill.d-sm-none{
+            display: none
+        }
     </style>
 @endsection
 <div>
@@ -54,6 +57,8 @@
             @endforeach
         </tbody>
     </table>
+    <br>
+    {{ $categories->links() }}
 
 
 </div>

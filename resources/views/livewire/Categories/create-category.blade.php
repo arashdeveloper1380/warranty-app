@@ -9,7 +9,7 @@
     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
         <div class="form-group">
             <label for="name">عنوان دسته بندی</label>
-            <input type="text" wire:model="name" class="form-control" placeholder="عنوان دسته بندی را وارد کنید">
+            <input type="text" wire:model="name" required class="form-control" placeholder="عنوان دسته بندی را وارد کنید">
         </div>
     </div>
 
