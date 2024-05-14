@@ -5,9 +5,8 @@ namespace App\Livewire\Products;
 use App\Models\Product;
 use Livewire\Component;
 
-class ProductController extends Component
-{
-
+class ProductController extends Component{
+    
     private function getProducts(){
         return Product::query()->paginate(10);
     }

@@ -14,9 +14,8 @@
 
     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
         <div class="form-group">
-            <label for="name">دسته مادر</label>
-            <select class="form-control" wire:model="parent_id">
-                <option value="0" style="color: red">دسته مادر</option>
+            <label for="name">دسته بندی</label>
+            <select class="form-control" wire:model="category_id">
                 @foreach ($getCategories as $key => $value)
 
                     <option value="{{ $value->id }}">{{ $value->name }}</option>
@@ -38,7 +37,7 @@
     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
         <div class="form-group">
             <label for="name">قیمت</label>
-            <input type="text" wire:model="price" required class="form-control" placeholder="قیمت را وارد کنید">
+            <input type="text" wire:model="price" required required class="form-control" placeholder="قیمت را وارد کنید">
         </div>
     </div>
 
@@ -50,6 +49,6 @@
     </div>
 
     <div class="form-group">
-        <button type="button" class="btn btn-primary" wire:click="create">ذخیره دسته بندی</button>
+        <button type="button" style="border-radius: 20px" class="btn btn-primary" wire:click="create">ذخیره محصول</button>
     </div>
 </div>

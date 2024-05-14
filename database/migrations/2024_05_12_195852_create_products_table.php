@@ -23,7 +23,7 @@ return new class extends Migration
 
             $table->text('price');
             $table->text('code_unique');
-            $table->tinyInteger('status'); //deActive - Activated By Admin - Activated By Users
+            $table->string('status')->default('de_active'); //deActive - Activated By Admin - Activated By Users
 
             $table->timestamps();
         });

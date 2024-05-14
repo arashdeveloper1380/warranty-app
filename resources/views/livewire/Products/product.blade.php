@@ -23,7 +23,7 @@
     @if(session()->has('success'))
         <div class="alert alert-success">{{ session()->get('success') }}</div>
     @endif
-    <a href="{{ route('category.create') }}" class="btn btn-primary pull-left">+ محصول جدید</a><br>
+    <a href="{{ route('product.create') }}" class="btn btn-primary pull-left">+ محصول جدید</a><br>
     <br>
     <table class="table table-bordered table-striped table-hover">
         <thead>
@@ -40,8 +40,8 @@
                 <tr>
                     <th style="text-align: center">{{ $key + 1 }}</th>
                     <td style="text-align: center; width: 30%">{{ $value->name }}</td>
-                    <td style="text-align: center">{{ $valute->category->name }}</td>
-                    <td style="text-align: center">{{ $valute->price }}</td>
+                    <td style="text-align: center">{{ $value->category->name }}</td>
+                    <td style="text-align: center">{{ $value->price }}</td>
                     <td style="text-align: center">
                         <select class="form-control">
                             <option value="de_acive">غیر فعال</option>
