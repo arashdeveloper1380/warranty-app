@@ -10,7 +10,9 @@
 <script src="{{ asset('admin/js/libs/bootstrap.min.js') }}"></script>
 <script src="{{ asset('admin/js/app.js') }}"></script>
 <script src="{{ asset('admin/js/views/main.js') }}"></script>
-
+@livewireScripts
+<script src="{{ asset('admin/js/sweetalert2.js') }}"></script>
+<x-livewire-alert::scripts />
     @yield('footer')
 </body>
 </html>

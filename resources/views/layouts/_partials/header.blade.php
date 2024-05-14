@@ -12,6 +12,7 @@
     <link href="{{ asset('admin/css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('admin/css/simple-line-icons.css') }}" rel="stylesheet">
     <link href="{{ asset('admin/dest/style.css') }}" rel="stylesheet">
+    @livewireStyles
 
     @yield('header')
 </head>
