@@ -45,9 +45,20 @@
                     <td style="text-align: center">{{ $value->price }}</td>
                     <td style="text-align: center">{{ $value->code_unique }}</td>
                     <td>
-                        <button type="button" style="margin-bottom: 5px" @if($value->status != "de_active") @disabled(true) @endif class="btn btn-warning" wire:click="deActive('{{ $value->id }}')">غیر فعال</button>
-                        <button type="button" style="margin-bottom: 5px" @if($value->status == "active_by_admin") disable @endif class="btn btn-success" value="active_by_admin">فعال کردن توسط ادمین</button>
-                        <button type="button" @if($value->status == "active_by_customer") disable @endif class="btn btn-primary" value="active_by_customer">فعال کردن توسط مشتری</button>
+                        {{-- <button type="button" style="margin-bottom: 5px" @if($value->status = "de_active") @disabled(true) @endif class="btn btn-warning" wire:click="deActive('{{ $value->id }}')">غیر فعال</button> --}}
+                        <button 
+                            type="button" 
+                            style="margin-bottom: 5px" 
+                            @if($value->status == "active_by_admin") disable @endif 
+                            class="btn @if($value->status == "de_active") btn-success @else btn-danger @endif" 
+                            wire:click="activeByAdmin('{{ $value->id }}')">
+                            @if($value->status == "de_active")
+                                فعال کردن توسط ادمین
+                            @else
+                            فعال شده
+                            @endif
+                        </button>
+                        {{-- <button type="button" @if($value->status == "active_by_customer") disable @endif class="btn btn-primary" value="activeByCustomer('{{ $value->id }}')">فعال کردن توسط مشتری</button> --}}
                     </td>
                 </tr>
             @endforeach
