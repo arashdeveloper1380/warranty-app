@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class);
 
-Route::prefix('/dashboard')->group(function(){
+Route::prefix('/dashboard')->middleware('is_login')->group(function(){
 
     Route::get('/', DashboardController::class)->name('dashboard.index');
 
