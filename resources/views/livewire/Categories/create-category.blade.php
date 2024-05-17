@@ -8,8 +8,22 @@
 
     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
         <div class="form-group">
-            <label for="name">عنوان دسته بندی</label>
+            <label for="name">
+                عنوان دسته بندی
+                @error('name') <span style="color: crimson">{{ $message }}</span> @enderror
+            </label>
             <input type="text" wire:model="name" required class="form-control" placeholder="عنوان دسته بندی را وارد کنید">
+        </div>
+    </div>
+
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group">
+            
+            <label for="name">
+                کد اختصار
+                @error('code') <span style="color: crimson">{{ $message }}</span> <br> @enderror
+            </label>
+            <input type="text" wire:model="code" class="form-control" placeholder="کد اختصار را وارد کنید">
         </div>
     </div>
 
@@ -36,8 +50,7 @@
         </div>
     </div>
 
-
-    <div class="form-group">
+    <div class="form-group" style="clear: both">
         <button type="button" class="btn btn-primary" wire:click="create">ذخیره دسته بندی</button>
     </div>
 

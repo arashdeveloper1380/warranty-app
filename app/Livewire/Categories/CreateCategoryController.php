@@ -9,6 +9,17 @@ class CreateCategoryController extends Component
 {
     public string $name = '';
     public string $parent_id = '';
+    public string $code = '';
+
+    protected $rules = [
+        'name'      => 'required',
+        'code'      => 'regex:/^[a-zA-Z ]+$/',
+    ];
+
+    protected $messages = [
+        'name.required' => 'نام محصول را وارد کنید',
+        'code.regex'    => 'کد اختصار باید از نوع حروف باشد ',
+    ];
 
     public function getCategories(){
         return Category::query()
@@ -17,8 +28,11 @@ class CreateCategoryController extends Component
     }
 
     public function create(){
+        $this->validate();
+
         Category::query()->create([
             'name'      => $this->name,
+            'code'      => $this->code,
             'parent_id' => $this->parent_id,
         ]);
 

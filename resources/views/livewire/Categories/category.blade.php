@@ -30,6 +30,7 @@
                 <th style="text-align: center">#</th>
                 <th style="text-align: center">نام دسته بندی</th>
                 <th style="text-align: center">دسته مادر</th>
+                <th style="text-align: center">کد اختصار</th>
             </tr>
         </thead>
         <tbody style="text-align: center">
@@ -44,7 +45,7 @@
                             <span class="alert alert-danger custom-parent">ندارد</span>
                         @endif
                     </td>
-
+                    <td style="text-align: center; width: 30%">{{ $value->code ?? 'ندارد' }}</td>
                 </tr>
             @endforeach
         </tbody>
