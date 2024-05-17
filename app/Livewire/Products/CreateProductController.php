@@ -22,19 +22,19 @@ class CreateProductController extends Component
     }
     
     public function create(){
-        $uuid = Str::uuid();
+        $barcode = random_int(1000000000,9999999999);
         if (!empty($this->count)) {
             try {
-                DB::transaction(function () use ($uuid) {
+                DB::transaction(function () use ($barcode) {
                     for ($i = 0; $i < $this->count; $i++) {
                         Product::create([
                             'name'          => $this->name,
                             'category_id'   => $this->category_id,
                             'price'         => $this->price,
-                            'code_unique'   => $uuid,
-                            'status'        => 'de_acive'
+                            'code_unique'   => $this->getCategoryCode($this->category_id) . $barcode,
+                            'status'        => 'de_active'
                         ]);
-                        $uuid = Str::uuid();
+                        $barcode = random_int(1000000000,9999999999);
                     }
                 });
             } catch (Exception $e) {
@@ -45,6 +45,9 @@ class CreateProductController extends Component
         return redirect()->route('product.index')->with('success', 'محصول با موفقیت ایجاد شد');
     }
 
+    private function getCategoryCode(int $category_id) :string{
+        return Category::query()->find($category_id)->code;
+    }
     public function render(){
         $getCategories = $this->getCategories();
 
