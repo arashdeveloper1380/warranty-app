@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Livewire\Categories\CategoryController;
 use App\Livewire\Categories\CreateCategoryController;
 use App\Livewire\DashboardController;
+use App\Livewire\HomeController;
 use App\Livewire\Products\CreateProductController;
 use App\Livewire\Products\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -19,9 +20,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', HomeController::class);
 
 Route::prefix('/dashboard')->group(function(){
 
@@ -47,3 +46,7 @@ Route::prefix('/dashboard')->group(function(){
 // });
 
 require __DIR__.'/auth.php';
+
+Route::get('register', function () {
+    return redirect('/');
+});
