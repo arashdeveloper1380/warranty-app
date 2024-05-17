@@ -17,7 +17,7 @@
 					<input type="text" wire:model="city" class="input" placeholder="شهر">
 					<input type="text" wire:model="shop_name" class="input" placeholder="نام فروشگاه">
 					<input type="text" wire:model="code" class="input" placeholder="سریال کد">
-					<input type="button" class="button" value="ثبت گارانتی">
+					<input type="button" wire:click="create" class="button" value="ثبت گارانتی">
 				</form>
 			</div>
 

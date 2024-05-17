@@ -47,6 +47,6 @@ Route::prefix('/dashboard')->middleware('is_login')->group(function(){
 
 require __DIR__.'/auth.php';
 
-Route::get('register', function () {
-    return redirect('/');
-});
+// Route::get('register', function () {
+//     return redirect('/');
+// });

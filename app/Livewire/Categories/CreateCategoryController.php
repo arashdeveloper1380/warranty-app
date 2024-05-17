@@ -30,10 +30,12 @@ class CreateCategoryController extends Component
     public function create(){
         $this->validate();
 
+        $parentId = intval($this->parent_id);
+
         Category::query()->create([
             'name'      => $this->name,
             'code'      => $this->code,
-            'parent_id' => $this->parent_id,
+            'parent_id' => $parentId,
         ]);
 
         return redirect()->route('category.index')->with('success', 'دسته با موفقیت ثبت شد');
