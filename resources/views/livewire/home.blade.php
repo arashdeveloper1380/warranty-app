@@ -23,8 +23,8 @@
 
 			<div id="login-tab-content">
 				<form class="login-form" action="" method="post">
-					<input type="text" wire:model="code" class="input" placeholder="سریال کد">
-					<input type="button" class="button" value="استعلام گارانتی">
+					<input type="text" wire:model="check_code" class="input" placeholder="سریال کد">
+					<input type="button" wire:click="checkCode" class="button" value="استعلام گارانتی">
 				</form>
 			</div>
 

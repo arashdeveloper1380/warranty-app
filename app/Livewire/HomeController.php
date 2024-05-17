@@ -19,6 +19,8 @@ class HomeController extends Component
     public $shop_name;
     public $code;
 
+    public $check_code;
+
     protected $rules = [
         'name'      => 'required',
         'phone'     => 'required|numeric',
@@ -85,6 +87,39 @@ class HomeController extends Component
             ]);
         }
        
+    }
+
+    private function getProductCustomer(int $product_id){
+        return Customer::query()->where('product_id', $product_id)->first()->name;
+    }
+    public function checkCode(){
+        $product = Product::query()
+            ->with('customer')
+            ->where('code_unique', $this->check_code)
+            ->first();
+
+        if($product){
+            if ($product->status == "de_active") {
+                $this->alert('warning', 'گارانتی این محصول غیر فعال است', [
+                    'position'  => 'center',
+                    'timer'     => 3000,
+                    'toast'     => false,
+                ]);
+            }elseif($product->status == "adcive_by_customer"){
+                $customer = $this->getProductCustomer($product->id);
+                $this->alert('success', "گارانتی این محصول توسط $customer فعال شده", [
+                    'position'  => 'center',
+                    'timer'     => 3000,
+                    'toast'     => false,
+                ]);
+            }
+        }else{
+            $this->alert('error', 'محصولی با این سریال کد پیدا نشد', [
+                'position'  => 'center',
+                'timer'     => 3000,
+                'toast'     => false,
+            ]);
+        }
     }
 
     public function resetInputs(){
