@@ -2,29 +2,29 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Product;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 
-class ActiveWarrantyWhenAfterTwoMonth extends Command
-{
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
-    protected $signature = 'app:active-warranty-when-after-two-month';
+class ActiveWarrantyWhenAfterTwoMonth extends Command{
+    
+    protected $signature = 'app:activeWarrantyWhenAfterTwoMonth';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'Command description';
+    protected $description = 'Active Warranty When After Two Month';
 
-    /**
-     * Execute the console command.
-     */
-    public function handle()
-    {
-        //
+    public function handle(){
+        
+        $products = Product::query()
+            ->WhereNotNull(['active_after_two_month'])
+            ->get();
+
+        foreach ($products as  $product) {
+            $twoMonthsAgo = Carbon::now();
+
+            if ($twoMonthsAgo > $product->active_after_two_month) {
+                $product->update(['status' => 'active_by_admin']);
+                $this->info("[*] Product id {$product->id} is Activated By Admin");
+            }
+        }
     }
 }

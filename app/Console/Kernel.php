@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\ActiveWarrantyWhenAfterTwoMonth;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -12,7 +13,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command(ActiveWarrantyWhenAfterTwoMonth::class)->daily();
+        // php artisan schedule:run
+        // cpanel cron job => * * * * * php artisan app:activeWarrantyWhenAfterTwoMonth >> /var/log/laravel.log 2>&1
     }
 
     /**

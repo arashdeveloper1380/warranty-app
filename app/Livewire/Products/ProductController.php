@@ -3,6 +3,7 @@
 namespace App\Livewire\Products;
 
 use App\Models\Product;
+use Carbon\Carbon;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -48,7 +49,9 @@ class ProductController extends Component{
                 'toast'     => false,
             ]);
         }else{
-            $product->update(['active_after_two_month' => 1]);
+            $product->update([
+                'active_after_two_month' => Carbon::parse($product->updated_at)->addMonths(2),
+            ]);
             $this->alert('success', 'گارانتی محصول بعد از دو ماه فعال میشود', [
                 'position'  => 'center',
                 'timer'     => 3000,
