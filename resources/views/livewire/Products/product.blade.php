@@ -55,7 +55,7 @@
                         <button 
                             type="button" 
                             style="margin-bottom: 5px" 
-                            @if($value->status == "active_by_admin") disable @endif 
+                            @if($value->active_after_two_month == 1) disabled @endif
                             class="btn @if($value->status == "de_active") btn-success @else btn-danger @endif" 
                             wire:click="activeByAdmin('{{ $value->id }}')">
                             @if($value->status == "de_active")
@@ -63,6 +63,15 @@
                             @else
                                 فعال شده
                             @endif
+                        </button>
+
+                        <button 
+                            type="button" 
+                            style="margin-bottom: 5px" 
+                            @if($value->status != "de_active") disabled @endif
+                            class="btn @if($value->active_after_two_month == 1) btn-danger @else btn-primary @endif" 
+                            wire:click="activeAfterTwoMonth('{{ $value->id }}')">
+                            فعال کردن گارانتی بعد از دو ماه
                         </button>
                         {{-- <button type="button" @if($value->status == "active_by_customer") disable @endif class="btn btn-primary" value="activeByCustomer('{{ $value->id }}')">فعال کردن توسط مشتری</button> --}}
                     </td>

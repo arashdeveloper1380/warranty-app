@@ -25,6 +25,8 @@ return new class extends Migration
             $table->text('code_unique');
             $table->string('status')->default('de_active'); //deActive - Activated By Admin - Activated By Users
 
+            $table->tinyInteger('active_after_two_month')->default(0);
+
             $table->timestamps();
         });
     }

@@ -39,6 +39,24 @@ class ProductController extends Component{
         
     }
 
+    public function activeAfterTwoMonth(int $id){
+        $product = Product::query()->find($id);
+        if($product->active_after_two_month == 1){
+            $this->alert('success', 'گارانتی محصول بعد از دو ماه فعال میشود', [
+                'position'  => 'center',
+                'timer'     => 3000,
+                'toast'     => false,
+            ]);
+        }else{
+            $product->update(['active_after_two_month' => 1]);
+            $this->alert('success', 'گارانتی محصول بعد از دو ماه فعال میشود', [
+                'position'  => 'center',
+                'timer'     => 3000,
+                'toast'     => false,
+            ]);
+        }
+    }
+
     public function render(){
 
         $getProducts = $this->getProducts();
