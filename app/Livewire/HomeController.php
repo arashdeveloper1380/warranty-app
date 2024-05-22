@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Customer;
+use App\Models\Other;
 use App\Models\Product;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
@@ -36,6 +37,19 @@ class HomeController extends Component
         'city.required'    => 'شهر را وارد کنید',
         'code.required'    => 'کد سریالی را وارد کنید',
     ];
+    
+    public function mount(){
+
+        $currentViews = Other::query()
+            ->where('meta_key', 'views')
+            ->first()
+            ->meta_value;
+
+        Other::query()->where('meta_key', 'views')->update([
+            'meta_value' => $currentViews +1
+        ]);
+        
+    }
 
     public function create(){
         $this->validate();

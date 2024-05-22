@@ -16,7 +16,7 @@ class IsLogin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::check() && auth()->user()->is_admin == 1){
+        if(Auth::check() && auth()->user()->is_admin == 1 || !empty(auth()->user()->permission)){
             return $next($request);
         }
         return redirect('/');

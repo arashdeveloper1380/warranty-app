@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Livewire\Admins\AdminController;
+use App\Livewire\Admins\CreateAdminController;
 use App\Livewire\Categories\CategoryController;
 use App\Livewire\Categories\CreateCategoryController;
 use App\Livewire\DashboardController;
@@ -34,6 +36,11 @@ Route::prefix('/dashboard')->middleware('is_login')->group(function(){
     Route::prefix('product')->group(function(){
         Route::get('/', ProductController::class)->name('product.index');
         Route::get('/create', CreateProductController::class)->name('product.create');
+    });
+
+    Route::prefix('admin')->group(function(){
+        Route::get('/', AdminController::class)->name('admin.index');
+        Route::get('/create', CreateAdminController::class)->name('admin.create');
     });
     
 
