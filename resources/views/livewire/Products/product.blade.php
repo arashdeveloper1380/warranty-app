@@ -28,6 +28,9 @@
     <button class="btn btn-success pull-left" wire:click="result" style="margin-left: 10px">خروجی</button><br>
     
     <br>
+
+    <input style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;border: 0;border-radius: 5px; width: 300px;" type="text" wire:model.live="search" class="form-control" placeholder="جست وجو کنید ...!">
+    <br>
     <table class="table table-bordered table-striped table-hover">
         <thead>
             <tr>
@@ -82,6 +85,14 @@
                                 فعال کردن گارانتی بعد از دو ماه 
                             @endif
                             
+                        </button>
+
+                        <button 
+                            type="button" 
+                            style="margin-bottom: 5px" 
+                            class="btn btn-warning" 
+                            wire:click="deleteProduct('{{ $value->id }}')">
+                            حذف
                         </button>
                         {{-- <button type="button" @if($value->status == "active_by_customer") disable @endif class="btn btn-primary" value="activeByCustomer('{{ $value->id }}')">فعال کردن توسط مشتری</button> --}}
                     </td>

@@ -17,11 +17,14 @@ class ProductController extends Component{
     use WithPagination;
 
     public array $select_id = [];
+    public $search;
+ 
+    protected $queryString = ['search'];
 
     protected $paginationTheme = 'bootstrap';
 
     private function getProducts(){
-        return Product::query()->paginate(20);
+        return Product::query()->where('name', 'like', '%'.$this->search.'%')->paginate(20);
     }
     
     private function getProductCategory(int $category_id) :?object{
@@ -76,6 +79,7 @@ class ProductController extends Component{
             ];
 
         }
+        
         $bom = "\xEF\xBB\xBF";
 
         $csvContent = $bom;
@@ -141,6 +145,18 @@ class ProductController extends Component{
                 'toast'     => false,
             ]);
         }
+    }
+    
+    public function deleteProduct(int $id) : void{
+        $product = Product::query()->find($id);
+
+        $product->delete();
+
+        $this->alert('success', ' محصول با موفقیت حذف شد', [
+            'position'  => 'center',
+            'timer'     => 3000,
+            'toast'     => false,
+        ]);
     }
 
     public function render(){
