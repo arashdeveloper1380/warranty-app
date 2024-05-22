@@ -92,6 +92,7 @@ class HomeController extends Component
     private function getProductCustomer(int $product_id){
         return Customer::query()->where('product_id', $product_id)->first()->name;
     }
+    
     public function checkCode(){
         $product = Product::query()
             ->with('customer')
@@ -105,18 +106,26 @@ class HomeController extends Component
                     'timer'     => 3000,
                     'toast'     => false,
                 ]);
-            }elseif($product->status == "adcive_by_customer"){
+            }
+            if($product->status == "active_by_customer"){
                 $customer = $this->getProductCustomer($product->id);
                 $this->alert('success', "گارانتی این محصول توسط $customer فعال شده", [
                     'position'  => 'center',
-                    'timer'     => 3000,
+                    'timer'     => 4000,
+                    'toast'     => false,
+                ]);
+            }
+            if($product->status == "active_by_admin"){
+                $this->alert('success', "گارانتی این محصول توسط ادمین فعال شده", [
+                    'position'  => 'center',
+                    'timer'     => 4000,
                     'toast'     => false,
                 ]);
             }
         }else{
             $this->alert('error', 'محصولی با این سریال کد پیدا نشد', [
                 'position'  => 'center',
-                'timer'     => 3000,
+                'timer'     => 4000,
                 'toast'     => false,
             ]);
         }
