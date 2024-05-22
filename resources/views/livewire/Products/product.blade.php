@@ -24,12 +24,14 @@
         <div class="alert alert-success">{{ session()->get('success') }}</div>
     @endif
 
-    <a href="{{ route('product.create') }}" class="btn btn-primary pull-left">+ محصول جدید</a><br>
+    <a href="{{ route('product.create') }}" class="btn btn-primary pull-left">+ محصول جدید</a>
+    <button class="btn btn-success pull-left" wire:click="result" style="margin-left: 10px">خروجی</button><br>
     
     <br>
     <table class="table table-bordered table-striped table-hover">
         <thead>
             <tr>
+                <th style="text-align: center"></th>
                 <th style="text-align: center">#</th>
                 <th style="text-align: center">نام محصول</th>
                 <th style="text-align: center">دسته بندی</th>
@@ -41,6 +43,9 @@
         <tbody style="text-align: center">
             @foreach ($getProducts as $key => $value)
                 <tr>
+                    <th style="text-align: center">
+                        <input type="checkbox" wire:model="select_id.{{ $value->id }}">
+                    </th>
                     <th style="text-align: center">{{ $key + 1 }}</th>
                     <td style="text-align: center; width: 30%">{{ $value->name }}</td>
                     <td style="text-align: center">{{ $value->category->name }}</td>
