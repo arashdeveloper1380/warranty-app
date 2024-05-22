@@ -10,9 +10,12 @@ class CategoryController extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
+    public $search;
+ 
+    protected $queryString = ['search'];
 
     public function getCategories(){
-        return Category::query()->paginate(10);
+        return Category::query()->where('name', 'like', '%'.$this->search.'%')->paginate(10);
     }
     
     public function render(){

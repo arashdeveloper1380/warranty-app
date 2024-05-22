@@ -23,6 +23,7 @@
         <div class="alert alert-success">{{ session()->get('success') }}</div>
     @endif
     <a href="{{ route('category.create') }}" class="btn btn-primary pull-left">+ دسته بندی جدید</a><br>
+    <input style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;border: 0;border-radius: 5px; width: 300px;" type="text" wire:model.live="search" class="form-control" placeholder="جست وجو کنید ...!">
     <br>
     <table class="table table-bordered table-striped table-hover">
         <thead>

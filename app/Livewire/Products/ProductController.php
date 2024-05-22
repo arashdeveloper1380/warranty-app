@@ -53,10 +53,26 @@ class ProductController extends Component{
         return $status;
     }
     public function result(){
+        if(empty($this->select_id)){
+            $this->alert('warning', 'لطفا چند محصول را انتخاب کنید', [
+                'position'  => 'center',
+                'timer'     => 3000,
+                'toast'     => false,
+            ]);
+            return;
+        }
         $checkedArry = [];
         foreach ($this->select_id as $key => $value){
             if($value == "true"){
                 $checkedArry[] = $key;
+            }
+            else{
+                $this->alert('warning', 'لطفا چند محصول را انتخاب کنید', [
+                    'position'  => 'center',
+                    'timer'     => 3000,
+                    'toast'     => false,
+                ]);
+                return;
             }
         }
 
