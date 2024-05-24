@@ -8,14 +8,18 @@
     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
         <div class="form-group">
             <label for="name">عنوان محصول</label>
-            <input type="text" wire:model="name" required class="form-control" placeholder="عنوان محصول را وارد کنید">
+            <select wire:model="product_id" class="form-control">
+                @foreach ($getProduct as $item)
+                    <option value="{{ $item->id }}">{{ $item->name }}</option>  
+                @endforeach
+            </select>
         </div>
     </div>
 
-    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+    {{-- <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
         <div class="form-group">
             <label for="name">دسته بندی</label>
-            <select class="form-control" wire:model="category_id">
+            <select class="form-control" wire:model="category_id" disabled>
                 @foreach ($getCategories as $key => $value)
 
                     <option value="{{ $value->id }}">{{ $value->name }}</option>
@@ -32,7 +36,7 @@
                 @endforeach
             </select>
         </div>
-    </div>
+    </div> --}}
 
     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
         <div class="form-group">
@@ -48,7 +52,7 @@
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" style="clear: both">
         <button type="button" style="border-radius: 20px" class="btn btn-primary" wire:click="create">ذخیره محصول</button>
     </div>
 </div>

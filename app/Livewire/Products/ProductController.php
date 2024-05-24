@@ -165,6 +165,7 @@ class ProductController extends Component{
         }
     }
     
+    
     public function deleteProduct(int $id) : void{
         $product = Product::query()->find($id);
 
