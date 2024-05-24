@@ -30,7 +30,6 @@
             <tr>
                 <th style="text-align: center">#</th>
                 <th style="text-align: center">نام دسته بندی</th>
-                <th style="text-align: center">دسته مادر</th>
                 <th style="text-align: center">کد اختصار</th>
             </tr>
         </thead>
@@ -38,14 +37,26 @@
             @foreach ($categories as $key => $value)
                 <tr>
                     <th style="text-align: center">{{ $key + 1 }}</th>
-                    <td style="text-align: center; width: 30%">{{ $value->name }}</td>
-                    <td style="text-align: center">
+                    <td style="text-align: center; width: 30%">
+                        <p style="color: crimson">{{ $value->name }}</p>
+                        <ul style="list-style-type: none">
+                            @foreach ($value->getChild as $key2 => $value2)
+                                <li>{{ $value2->name }}</li>
+                                <ul style="list-style-type: none">
+                                    @foreach ($value2->getChild as $key3 => $value3)
+                                        <li>{{ $value3->name }}</li>
+                                    @endforeach
+                                </ul>
+                            @endforeach
+                        </ul>
+                    </td>
+                    {{-- <td style="text-align: center">
                         @if (!empty($value->parent_id))
                             <span class="alert alert-success custom-parent">{{ $value->getParent->name}}</span>
                         @else
                             <span class="alert alert-danger custom-parent">ندارد</span>
                         @endif
-                    </td>
+                    </td> --}}
                     <td style="text-align: center; width: 30%">{{ $value->code ?? 'ندارد' }}</td>
                 </tr>
             @endforeach
