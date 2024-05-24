@@ -15,7 +15,10 @@ class CategoryController extends Component
     protected $queryString = ['search'];
 
     public function getCategories(){
-        return Category::query()->where('name', 'like', '%'.$this->search.'%')->paginate(10);
+        return Category::query()
+            ->where('parent_id', 0)
+            ->where('name', 'like', '%'.$this->search.'%')
+            ->paginate(10);
     }
     
     public function render(){

@@ -14,6 +14,55 @@
         .d-flex.justify-content-between.flex-fill.d-sm-none{
             display: none
         }
+        .dropbtn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            width: 70px;
+            height: 40px;
+            line-height: 6px;
+
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {background-color: #f1f1f1}
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            background-color: #3e8e41;
+        }
+        .warning{
+            background-color: rgb(223, 223, 20)
+        }
+        .danger{
+            background-color: crimson;
+        }
     </style>
 @endsection
 <div>
@@ -31,6 +80,7 @@
                 <th style="text-align: center">#</th>
                 <th style="text-align: center">نام دسته بندی</th>
                 <th style="text-align: center">کد اختصار</th>
+                <th style="text-align: center">مدیریت</th>
             </tr>
         </thead>
         <tbody style="text-align: center">
@@ -50,14 +100,35 @@
                             @endforeach
                         </ul>
                     </td>
-                    {{-- <td style="text-align: center">
-                        @if (!empty($value->parent_id))
-                            <span class="alert alert-success custom-parent">{{ $value->getParent->name}}</span>
-                        @else
-                            <span class="alert alert-danger custom-parent">ندارد</span>
-                        @endif
-                    </td> --}}
                     <td style="text-align: center; width: 30%">{{ $value->code ?? 'ندارد' }}</td>
+                    <td style="text-align: center; width: 25%">
+                        
+                        <div class="dropdown">
+                            <button class="dropbtn warning">ویرایش</button>
+                            <div class="dropdown-content">
+                                <a href="#">{{ $value->name }}</a>
+                                @foreach ($value->getChild as $item)
+                                    <a href="#">{{ $item->name }}</a>
+                                    @foreach ($item->getChild as $item2)
+                                        <a href="#">{{ $item2->name }}</a>
+                                    @endforeach
+                                @endforeach
+                            </div>
+                        </div>
+
+                        <div class="dropdown">
+                            <button class="dropbtn danger">حذف</button>
+                            <div class="dropdown-content">
+                                <a href="#">{{ $value->name }}</a>
+                                @foreach ($value->getChild as $item)
+                                    <a href="#">{{ $item->name }}</a>
+                                    @foreach ($item->getChild as $item2)
+                                        <a href="#">{{ $item2->name }}</a>
+                                    @endforeach
+                                @endforeach
+                            </div>
+                        </div>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
