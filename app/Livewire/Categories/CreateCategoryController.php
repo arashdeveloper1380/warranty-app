@@ -40,6 +40,7 @@ class CreateCategoryController extends Component
 
         return redirect()->route('category.index')->with('success', 'دسته با موفقیت ثبت شد');
     }
+    
     public function render(){
         $getCategories = $this->getCategories();
 

@@ -41,14 +41,20 @@
             z-index: 1;
         }
 
-        .dropdown-content a {
+        .button{
+            border: 0;
+            background-color: transparent;
+            display: inline;
+            width: 100%;
+        }
+        .dropdown-content a, button {
             color: black;
             padding: 12px 16px;
             text-decoration: none;
             display: block;
         }
 
-        .dropdown-content a:hover {background-color: #f1f1f1}
+        .dropdown-content a:hover, button:hover {background-color: #f1f1f1}
 
         .dropdown:hover .dropdown-content {
             display: block;
@@ -119,11 +125,11 @@
                         <div class="dropdown">
                             <button class="dropbtn danger">حذف</button>
                             <div class="dropdown-content">
-                                <a href="#">{{ $value->name }}</a>
+                                <button class="button" wire:click="delete('{{ $value->id }}')">{{ $value->name }}</button>
                                 @foreach ($value->getChild as $item)
-                                    <a href="#">{{ $item->name }}</a>
+                                    <button class="button" wire:click="delete('{{ $item->id }}')">{{ $item->name }}</button>
                                     @foreach ($item->getChild as $item2)
-                                        <a href="#">{{ $item2->name }}</a>
+                                        <button class="button" wire:click="delete('{{ $item2->id }}')">{{ $item2->name }}</button>
                                     @endforeach
                                 @endforeach
                             </div>
