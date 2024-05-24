@@ -5,11 +5,14 @@ use App\Livewire\Admins\AdminController;
 use App\Livewire\Admins\CreateAdminController;
 use App\Livewire\Categories\CategoryController;
 use App\Livewire\Categories\CreateCategoryController;
+use App\Livewire\Categories\CreateDefaultProdutController;
 use App\Livewire\Categories\EditCategoryController;
 use App\Livewire\DashboardController;
+use App\Livewire\Categories\DefaultProductController;
 use App\Livewire\HomeController;
 use App\Livewire\Products\CreateProductController;
 use App\Livewire\Products\ProductController;
+use App\Models\DefaultProduct;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,6 +36,11 @@ Route::prefix('/dashboard')->middleware('is_login')->group(function(){
         Route::get('/', CategoryController::class)->name('category.index');
         Route::get('/create', CreateCategoryController::class)->name('category.create');
         Route::get('/edit/{id}', EditCategoryController::class)->name('category.edit');
+
+        Route::get('/default-product', DefaultProductController::class)->name('default-product.index');
+        Route::get('/create-default-product', CreateDefaultProdutController::class)->name('default-product.create');
+        
+
     });
 
     Route::prefix('product')->group(function(){

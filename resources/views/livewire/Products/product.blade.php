@@ -38,25 +38,37 @@
                 <th style="text-align: center">#</th>
                 <th style="text-align: center">نام محصول</th>
                 <th style="text-align: center">دسته بندی</th>
-                <th style="text-align: center">قیمت</th>
+                <th style="text-align: center;width: 45%;">قیمت</th>
                 <th style="text-align: center; width: 28%">کد سریال</th>
+                <th style="text-align: center; width: 28%">تاریخ ثبت محصول</th>
+                <th style="text-align: center; width: 28%">تاریخ ثبت گارانتی</th>
                 <th style="text-align: center; width: 10%">وضعیت</th>
             </tr>
         </thead>
         <tbody style="text-align: center">
             @foreach ($getProducts as $key => $value)
                 <tr>
-                    <th style="text-align: center">
+                    <th style="text-align: center; vertical-align: middle">
                         <input type="checkbox" wire:model="select_id.{{ $value->id }}">
                     </th>
-                    <th style="text-align: center">{{ $key + 1 }}</th>
-                    <td style="text-align: center; width: 30%">{{ $value->name }}</td>
-                    <td style="text-align: center">{{ $value->category->name }}</td>
-                    <td style="text-align: center">{{ $value->price }}</td>
-                    <td style="text-align: center">
+                    <th style="text-align: center; vertical-align: middle">{{ $key + 1 }}</th>
+                    <td style="text-align: center; vertical-align: middle; width: 30%">{{ $value->name }}</td>
+                    <td style="text-align: center; vertical-align: middle">{{ $value->category->name }}</td>
+                    <td style="text-align: center; vertical-align: middle">{{ $value->price }}</td>
+                    <td style="text-align: center; vertical-align: middle">
                         <div style="display: flex;justify-content: center;">
                             {!! DNS1D::getBarcodeHTML($value->code_unique, "C128",1.4,22) !!}
                         </div>
+                        <p>{{ $value->code_unique }}</p>
+                    </td>
+                    <td style="text-align: center; vertical-align: middle">{{ verta()->instance($value->created_at)->format('Y/m/d h:i:s') }}</td>
+                    <td style="text-align: center; vertical-align: middle">
+                        @if ($value->created_at != $value->updated_at)
+                            {{ verta()->instance($value->updated_at)->format('Y/m/d h:i:s') }}
+                        @else
+                            هنوز ثبت نشده
+                        @endif
+                        
                     </td>
                     <td>
                         {{-- <button type="button" style="margin-bottom: 5px" @if($value->status = "de_active") @disabled(true) @endif class="btn btn-warning" wire:click="deActive('{{ $value->id }}')">غیر فعال</button> --}}

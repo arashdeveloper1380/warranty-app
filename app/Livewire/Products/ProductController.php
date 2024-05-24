@@ -24,7 +24,9 @@ class ProductController extends Component{
     protected $paginationTheme = 'bootstrap';
 
     private function getProducts(){
-        return Product::query()->where('name', 'like', '%'.$this->search.'%')->paginate(20);
+        return Product::query()
+            ->where('name', 'like', '%'.$this->search.'%')
+            ->paginate(20);
     }
     
     private function getProductCategory(int $category_id) :?object{

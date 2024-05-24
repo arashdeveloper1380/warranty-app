@@ -13,8 +13,14 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('category.index') }}"><i class="icon-puzzle"></i>دسته بندی</a>
                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('default-product.index') }}"><i class="icon-puzzle"></i>محصولات</a>
+                        </li>
+
                     </ul>
                 </li>
+
             @elseif(auth()->user()->is_admin == 1)
                 <li class="nav-item nav-dropdown">
                     <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i>مدیریت دسته بندی</a>
@@ -22,8 +28,14 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('category.index') }}"><i class="icon-puzzle"></i>دسته بندی</a>
                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('default-product.index') }}"><i class="icon-puzzle"></i>محصولات</a>
+                        </li>
+
                     </ul>
                 </li>
+
             @endif
             
 
