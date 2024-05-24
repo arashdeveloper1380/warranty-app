@@ -5,6 +5,7 @@ use App\Livewire\Admins\AdminController;
 use App\Livewire\Admins\CreateAdminController;
 use App\Livewire\Categories\CategoryController;
 use App\Livewire\Categories\CreateCategoryController;
+use App\Livewire\Categories\EditCategoryController;
 use App\Livewire\DashboardController;
 use App\Livewire\HomeController;
 use App\Livewire\Products\CreateProductController;
@@ -31,6 +32,7 @@ Route::prefix('/dashboard')->middleware('is_login')->group(function(){
     Route::prefix('category')->group(function(){
         Route::get('/', CategoryController::class)->name('category.index');
         Route::get('/create', CreateCategoryController::class)->name('category.create');
+        Route::get('/edit/{id}', EditCategoryController::class)->name('category.edit');
     });
 
     Route::prefix('product')->group(function(){

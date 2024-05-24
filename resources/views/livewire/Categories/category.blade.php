@@ -106,11 +106,11 @@
                         <div class="dropdown">
                             <button class="dropbtn warning">ویرایش</button>
                             <div class="dropdown-content">
-                                <a href="#">{{ $value->name }}</a>
+                                <a href="{{ route('category.edit', $value->id) }}">{{ $value->name }}</a>
                                 @foreach ($value->getChild as $item)
-                                    <a href="#">{{ $item->name }}</a>
+                                    <a href="{{ route('category.edit', $item->id) }}">{{ $item->name }}</a>
                                     @foreach ($item->getChild as $item2)
-                                        <a href="#">{{ $item2->name }}</a>
+                                        <a href="{{ route('category.edit', $item2->id) }}">{{ $item2->name }}</a>
                                     @endforeach
                                 @endforeach
                             </div>

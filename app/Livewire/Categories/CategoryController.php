@@ -22,7 +22,6 @@ class CategoryController extends Component
     }
     
     public function render(){
-        
         $categories = $this->getCategories();
 
         return view('livewire.Categories.category', compact('categories'))
