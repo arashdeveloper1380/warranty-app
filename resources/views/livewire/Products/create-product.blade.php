@@ -1,5 +1,5 @@
 <div>
-    <h2>ایجاد محصول جدید</h2><br><br>
+    <h2>ایجاد کد جدید</h2><br><br>
 
     @if(session()->has('success'))
         <div class="alert alert-danger">{{ session()->get('success') }}</div>

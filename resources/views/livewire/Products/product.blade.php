@@ -24,7 +24,7 @@
         <div class="alert alert-success">{{ session()->get('success') }}</div>
     @endif
 
-    <a href="{{ route('product.create') }}" class="btn btn-primary pull-left">+ محصول جدید</a>
+    <a href="{{ route('product.create') }}" class="btn btn-primary pull-left">+ کد جدید</a>
     <button class="btn btn-success pull-left" wire:click="result" style="margin-left: 10px">خروجی</button>
     <button class="btn btn-primary pull-left" wire:click="multiActive" style="margin-left: 10px">فعال کردن</button>
     <button class="btn btn-primary pull-left" wire:click="multiActiveWhenTwoMonth" style="margin-left: 10px">فعال کردن بعد از دو ماه</button>
@@ -32,8 +32,23 @@
     
     <br>
 
-    <input style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;border: 0;border-radius: 5px; width: 300px;" type="text" wire:model.live="search" class="form-control" placeholder="جست وجو کنید ...!">
-    <br>
+    <div class="col-lg-3">
+        <input style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;border: 0;border-radius: 5px; width: 300px;" type="text" wire:model.live="search" class="form-control" placeholder="جست وجو کنید ...!">
+    </div>
+
+    <div class="col-lg-1" style="margin-right: 100px;">
+        <button class="btn btn-success pull-left" wire:click.live="searchStatusBtn('active_by_customer')" style="margin-left: 10px">فعال شده کاربر</button>
+    </div>
+
+    <div class="col-lg-1" style="margin-right: 50px;">
+        <button class="btn btn-warning pull-left" wire:click.live="searchStatusBtn('active_by_admin')" style="margin-left: 10px">فعال شده ادمین</button>
+    </div>
+
+    <div class="col-lg-1" style="margin-right: 50px;">
+        <button class="btn btn-warning pull-left" wire:click.live="searchStatusBtn('de_active')" style="margin-left: 10px">غیر فعال شده ها</button>
+    </div>
+
+    <br><br>
     <table class="table table-bordered table-striped table-hover">
         <thead>
             <tr>

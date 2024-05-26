@@ -18,17 +18,28 @@ class ProductController extends Component{
 
     public array $select_id = [];
     public $search;
+    public $search_status;
  
     protected $queryString = ['search'];
-
     protected $paginationTheme = 'bootstrap';
 
     private function getProducts(){
-        return Product::query()
-            ->where('name', 'like', '%'.$this->search.'%')
-            ->paginate(20);
+        if($this->search_status){
+            return Product::query()
+                ->where('status', $this->search_status)
+                ->paginate(20);
+        }else{
+            return Product::query()
+                ->where('name', 'like', '%'.$this->search.'%')
+                ->paginate(20);
+        }
+        
     }
     
+    public function searchStatusBtn(string $status) {
+        $this->search_status = $status;
+    }
+
     private function getProductCategory(int $category_id) :?object{
         return Category::query()->find($category_id)->first();
     }
@@ -196,6 +207,8 @@ class ProductController extends Component{
             'toast'     => false,
         ]);
 
+        $this->select_id = [];
+
     }
     
     public function multiActiveWhenTwoMonth(){
@@ -220,7 +233,10 @@ class ProductController extends Component{
             ->get();
 
         foreach ($products as $product){
-            $product->update(['active_after_two_month' => Carbon::parse($product->updated_at)->addMonths(2)]);
+            $product->update([
+                'active_after_two_month' => 
+                Carbon::parse($product->updated_at)->addMonths(2)
+            ]);
         }
 
         $this->alert('success', 'گارانتی محصولات بعد از 2 ماه فعال می شود', [
@@ -228,6 +244,8 @@ class ProductController extends Component{
             'timer'     => 3000,
             'toast'     => false,
         ]);
+
+        $this->select_id = [];
     }
     
     public function deleteProduct(int $id) : void{
