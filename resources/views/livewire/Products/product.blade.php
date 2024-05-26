@@ -25,7 +25,10 @@
     @endif
 
     <a href="{{ route('product.create') }}" class="btn btn-primary pull-left">+ محصول جدید</a>
-    <button class="btn btn-success pull-left" wire:click="result" style="margin-left: 10px">خروجی</button><br>
+    <button class="btn btn-success pull-left" wire:click="result" style="margin-left: 10px">خروجی</button>
+    <button class="btn btn-primary pull-left" wire:click="multiActive" style="margin-left: 10px">فعال کردن</button>
+    <button class="btn btn-primary pull-left" wire:click="multiActiveWhenTwoMonth" style="margin-left: 10px">فعال کردن بعد از دو ماه</button>
+    <br>
     
     <br>
 

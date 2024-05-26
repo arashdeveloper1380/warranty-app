@@ -164,7 +164,71 @@ class ProductController extends Component{
             ]);
         }
     }
+
+    public function multiActive(){
+        if(empty($this->select_id)){
+            $this->alert('warning', 'لطفا چند محصول را انتخاب کنید', [
+                'position'  => 'center',
+                'timer'     => 3000,
+                'toast'     => false,
+            ]);
+            return;
+        }
+
+        $checkedArry = [];
+        foreach ($this->select_id as $key => $value){
+            if($value == "true"){
+                $checkedArry[] = $key;
+            }
+        }
+
+        $products = Product::query()
+            ->whereIn('id', $checkedArry)
+            ->get();
+
+        foreach ($products as $product){
+            $product->update(['status' => 'active_by_admin']);
+        }
+
+        $this->alert('success', 'گارانتی محصولات با موفقیت فعال شد', [
+            'position'  => 'center',
+            'timer'     => 3000,
+            'toast'     => false,
+        ]);
+
+    }
     
+    public function multiActiveWhenTwoMonth(){
+        if(empty($this->select_id)){
+            $this->alert('warning', 'لطفا چند محصول را انتخاب کنید', [
+                'position'  => 'center',
+                'timer'     => 3000,
+                'toast'     => false,
+            ]);
+            return;
+        }
+
+        $checkedArry = [];
+        foreach ($this->select_id as $key => $value){
+            if($value == "true"){
+                $checkedArry[] = $key;
+            }
+        }
+
+        $products = Product::query()
+            ->whereIn('id', $checkedArry)
+            ->get();
+
+        foreach ($products as $product){
+            $product->update(['active_after_two_month' => Carbon::parse($product->updated_at)->addMonths(2)]);
+        }
+
+        $this->alert('success', 'گارانتی محصولات بعد از 2 ماه فعال می شود', [
+            'position'  => 'center',
+            'timer'     => 3000,
+            'toast'     => false,
+        ]);
+    }
     
     public function deleteProduct(int $id) : void{
         $product = Product::query()->find($id);
