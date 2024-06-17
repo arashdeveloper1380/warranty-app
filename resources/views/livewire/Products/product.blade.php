@@ -26,17 +26,24 @@
 
     <a href="{{ route('product.create') }}" class="btn btn-primary pull-left">+ کد جدید</a>
     <button class="btn btn-success pull-left" wire:click="result" style="margin-left: 10px">خروجی</button>
-    <button class="btn btn-primary pull-left" wire:click="multiActive" style="margin-left: 10px">فعال کردن</button>
-    <button class="btn btn-primary pull-left" wire:click="multiActiveWhenTwoMonth" style="margin-left: 10px">فعال کردن بعد از دو ماه</button>
+    <button class="btn btn-primary pull-left" wire:click="multiActive" style="margin-left: 10px">فعال کردن گروهی</button>
+    <button class="btn btn-primary pull-left" wire:click="multiActiveWhenTwoMonth" style="margin-left: 10px">فعال کردن گروهی بعد از دو ماه</button>
     <br>
-    
     <br>
+    <br>
+   
 
     <div class="col-lg-3">
         <input style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;border: 0;border-radius: 5px; width: 300px;" type="text" wire:model.live="search" class="form-control" placeholder="جست وجو کنید ...!">
+        
     </div>
 
-    <div class="col-lg-1" style="margin-right: 100px;">
+    <div class="col-lg-1" style="margin-right: 50px; line-height: 40px;">
+        <span>فیلتر: </span>
+    </div>
+    
+    <div class="col-lg-1" style="margin-right: 20px;">
+        
         <button class="btn btn-success pull-left" wire:click.live="searchStatusBtn('active_by_customer')" style="margin-left: 10px">فعال شده کاربر</button>
     </div>
 

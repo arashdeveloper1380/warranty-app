@@ -65,7 +65,7 @@ class HomeController extends Component
         if($product){
 
             if ($product->status == "de_active") {
-                $product->update(['status' => 'adcive_by_customer']);
+                $product->update(['status' => 'active_by_customer']);
     
                 Customer::query()->create([
                     'name'      => $this->name,

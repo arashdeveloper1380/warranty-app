@@ -23,14 +23,14 @@ class ProductController extends Component{
     protected $queryString = ['search'];
     protected $paginationTheme = 'bootstrap';
 
-    private function getProducts(){
+    private function getProducts() :?object{
         if($this->search_status){
             return Product::query()
                 ->where('status', $this->search_status)
-                ->paginate(20);
+                ->paginate(10);
         }else{
             return Product::query()
-                ->where('name', 'like', '%'.$this->search.'%')
+                ->where('code_unique', 'like', '%'.$this->search.'%')
                 ->paginate(20);
         }
         
@@ -145,7 +145,7 @@ class ProductController extends Component{
                 'toast'     => false,
             ]);
         }else{
-            $product->update(['status' => 'adcive_by_admin']);
+            $product->update(['status' => 'active_by_admin']);
 
             $this->alert('success', 'گارانتی محصول با موفقیت فعال شد', [
                 'position'  => 'center',
