@@ -18,6 +18,7 @@ class ProductController extends Component{
 
     public array $select_id     = [];
     public array $select_all_id = [];
+    public $selectAll = [];
 
     public $search;
     public $search_status;
@@ -29,15 +30,26 @@ class ProductController extends Component{
         if($this->search_status){
             return Product::query()
                 ->where('status', $this->search_status)
-                ->paginate(10);
+                ->paginate(50);
         }else{
             return Product::query()
                 ->where('code_unique', 'like', '%'.$this->search.'%')
-                ->paginate(20);
+                ->paginate(50);
         }
         
     }
     
+    public function selectAllProducts(){
+        $products = $this->getProducts();
+        if ($this->selectAll) {
+            $this->select_id = $products->pluck('id')->mapWithKeys(function ($id) {
+                return [$id => true];
+            })->toArray();
+        } else {
+            $this->select_id = [];
+        }
+    }
+
     public function searchStatusBtn(string $status) {
         $this->search_status = $status;
     }
@@ -75,65 +87,67 @@ class ProductController extends Component{
                 'toast'     => false,
             ]);
             return;
-        }
-        $checkedArry = [];
-        foreach ($this->select_id as $key => $value){
-            if($value == "true"){
-                $checkedArry[] = $key;
+        }else{
+            $checkedArry = [];
+            foreach ($this->select_id as $key => $value){
+                if($value == "true"){
+                    $checkedArry[] = $key;
+                }
+                else{
+                    $this->alert('warning', 'لطفا چند محصول را انتخاب کنید', [
+                        'position'  => 'center',
+                        'timer'     => 3000,
+                        'toast'     => false,
+                    ]);
+                    return;
+                }
             }
-            else{
-                $this->alert('warning', 'لطفا چند محصول را انتخاب کنید', [
-                    'position'  => 'center',
-                    'timer'     => 3000,
-                    'toast'     => false,
-                ]);
-                return;
+    
+            $products = Product::query()
+                ->whereIn('id', $checkedArry)
+                ->get();
+    
+            $datas = [];
+    
+            foreach ($products as $product) {
+                // $csvGenerator = new DNS1D();
+                // $csvGenerator->getBarcodeHTML($product->code_unique, "C128",1.4,22)
+                // $product->status == "de_active" ?: 'غیر فعال', $product->status == "active_by_admin" ?: 'فعال شده توسط ادمین', $product->status == "active_by_customer" ?: 'فعال شده توسط مشتری'
+                $datas[] = [
+                    'name'          => $product->name,
+                    'category'      => $this->getProductCategory($product->category_id)->name,
+                    'price'         => $product->price,
+                    'code_unique'   => $product->code_unique,
+                    'status'        => $this->getProductStatus($product->id)
+                ];
+    
             }
+            
+            $bom = "\xEF\xBB\xBF";
+    
+            $csvContent = $bom;
+            
+            $csvContent .= implode(',', ['نام', 'دسته بندی ','قیمت', 'بار کد', 'وضعیت گارانتی']) . "\r\n";
+    
+            foreach ($datas as $row){
+                $csvContent .= implode(',', $row) . "\r\n";
+            }
+            $fileName = "data_" . time() . ".csv";
+    
+            $filePath = public_path('csv/' . $fileName);
+            
+            if (!File::isDirectory(public_path('csv'))) {
+                File::makeDirectory(public_path('csv'), 0755, true);
+            }
+    
+            File::put($filePath, $csvContent);
+            
+            return response()->download($filePath, $fileName, [
+                'Content-Type' => 'text/csv',
+                'Content-Disposition' => 'attachment; filename="' . $fileName . '"',
+            ])->deleteFileAfterSend();
         }
-
-        $products = Product::query()
-            ->whereIn('id', $checkedArry)
-            ->get();
-
-        $datas = [];
-
-        foreach ($products as $product) {
-            // $csvGenerator = new DNS1D();
-            // $csvGenerator->getBarcodeHTML($product->code_unique, "C128",1.4,22)
-            // $product->status == "de_active" ?: 'غیر فعال', $product->status == "active_by_admin" ?: 'فعال شده توسط ادمین', $product->status == "active_by_customer" ?: 'فعال شده توسط مشتری'
-            $datas[] = [
-                'name'          => $product->name,
-                'category'      => $this->getProductCategory($product->category_id)->name,
-                'price'         => $product->price,
-                'code_unique'   => $product->code_unique,
-                'status'        => $this->getProductStatus($product->id)
-            ];
-
-        }
-        
-        $bom = "\xEF\xBB\xBF";
-
-        $csvContent = $bom;
-        
-        $csvContent .= implode(',', ['نام', 'دسته بندی ','قیمت', 'بار کد', 'وضعیت گارانتی']) . "\r\n";
-
-        foreach ($datas as $row){
-            $csvContent .= implode(',', $row) . "\r\n";
-        }
-        $fileName = "data_" . time() . ".csv";
-
-        $filePath = public_path('csv/' . $fileName);
-        
-        if (!File::isDirectory(public_path('csv'))) {
-            File::makeDirectory(public_path('csv'), 0755, true);
-        }
-
-        File::put($filePath, $csvContent);
-        
-        return response()->download($filePath, $fileName, [
-            'Content-Type' => 'text/csv',
-            'Content-Disposition' => 'attachment; filename="' . $fileName . '"',
-        ])->deleteFileAfterSend();
+      
     }
 
 

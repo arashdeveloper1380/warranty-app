@@ -59,7 +59,9 @@
     <table class="table table-bordered table-striped table-hover">
         <thead>
             <tr>
-                <th style="text-align: center"></th>
+                <th style="text-align: center">
+                    <input type="checkbox" id="selectAll" wire:model="selectAll" wire:click="selectAllProducts">
+                </th>
                 <th style="text-align: center">#</th>
                 <th style="text-align: center">نام محصول</th>
                 <th style="text-align: center">دسته بندی</th>
@@ -141,3 +143,7 @@
     {{ $getProducts->links() }}
 
 </div>
+
+@section('footer')
+
+@endsection
