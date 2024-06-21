@@ -39,7 +39,7 @@
             @endif
             
 
-            @if (auth()->user()->is_admin != 1 && in_array('category', auth()->user()->permission))
+            @if (auth()->user()->is_admin != 1 && in_array('product', auth()->user()->permission))
                 <li class="nav-item nav-dropdown">
                     <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i>مدیریت محصولات</a>
                     <ul class="nav-dropdown-items">

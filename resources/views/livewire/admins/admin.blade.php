@@ -31,6 +31,7 @@
                 <th style="text-align: center">نام</th>
                 <th style="text-align: center">ایمیل</th>
                 <th style="text-align: center">سطح دسترسی</th>
+                <th style="text-align: center">مدیریت</th>
             </tr>
         </thead>
         <tbody style="text-align: center">
@@ -57,6 +58,10 @@
                         @else
                         سوپر ادمین
                         @endif
+                    </td>
+                    <td style="text-align: center">
+                        <button class="btn btn-danger" wire:click="delete('{{ $value->id }}')">حذف</button>
+                        <a href="{{ url('dashboard/admin/edit', $value->id) }}" class="btn btn-warning">ویرایش</a>
                     </td>
                 </tr>
             @endforeach

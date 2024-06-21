@@ -22,13 +22,13 @@ class CreateAdminController extends Component
             }
         }
 
-        $bcryptPassword = Hash::make($this->password);
+        $bcryptPassword = password_hash($this->password, PASSWORD_BCRYPT);
 
         User::query()->create([
-            'name'  => $this->name,
-            'email' => $this->name,
-            'password' => $bcryptPassword,
-            'permission' => $permmisonArr,
+            'name'          => $this->name,
+            'email'         => $this->email,
+            'password'      => $bcryptPassword,
+            'permission'    => $permmisonArr,
         ]);
 
         return redirect()->route('admin.index')->with('success', 'کاربر با موفقیت ایجاد شد');

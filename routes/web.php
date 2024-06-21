@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\EditadminController;
 use App\Http\Controllers\ProfileController;
 use App\Livewire\Admins\AdminController;
 use App\Livewire\Admins\CreateAdminController;
+
 use App\Livewire\Categories\CategoryController;
 use App\Livewire\Categories\CreateCategoryController;
 use App\Livewire\Categories\CreateDefaultProdutController;
@@ -51,6 +53,8 @@ Route::prefix('/dashboard')->middleware('is_login')->group(function(){
     Route::prefix('admin')->group(function(){
         Route::get('/', AdminController::class)->name('admin.index');
         Route::get('/create', CreateAdminController::class)->name('admin.create');
+        Route::get('/edit/{id}', [EditadminController::class, 'edit']);
+        Route::put('/update/{id}', [EditadminController::class, 'update'])->name('admin.update');
     });
     
 
