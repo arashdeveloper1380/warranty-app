@@ -43,7 +43,7 @@ class CreateProductController extends Component
     
     public function create(){
         
-        $barcode = random_int(1000000000,9999999999);
+        $barcode = random_int(100000,999999);
         if (!empty($this->count)) {
             try {
                 DB::transaction(function () use ($barcode) {
@@ -55,7 +55,7 @@ class CreateProductController extends Component
                             'code_unique'   => $this->getCategoryCode($this->getProductById()->category->id) . $barcode,
                             'status'        => 'de_active'
                         ]);
-                        $barcode = random_int(1000000000,9999999999);
+                        $barcode = random_int(100000,999999);
                     }
                 });
             } catch (Exception $e) {

@@ -4,7 +4,6 @@ use App\Http\Controllers\EditadminController;
 use App\Http\Controllers\ProfileController;
 use App\Livewire\Admins\AdminController;
 use App\Livewire\Admins\CreateAdminController;
-
 use App\Livewire\Categories\CategoryController;
 use App\Livewire\Categories\CreateCategoryController;
 use App\Livewire\Categories\CreateDefaultProdutController;

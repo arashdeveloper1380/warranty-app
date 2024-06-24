@@ -13,12 +13,14 @@ class CreateCategoryController extends Component
 
     protected $rules = [
         'name'      => 'required',
-        'code'      => 'regex:/^[a-zA-Z ]+$/',
+        // 'code'      => 'regex:/^[a-zA-Z ]+$/',
+        'code'      => 'required',
     ];
 
     protected $messages = [
         'name.required' => 'نام محصول را وارد کنید',
-        'code.regex'    => 'کد اختصار باید از نوع حروف باشد ',
+        // 'code.regex'    => 'کد اختصار باید از نوع حروف باشد ',
+        'code.regex'    => 'کد اختصار را وارد کنید ',
     ];
 
     public function getCategories(){
